@@ -262,7 +262,7 @@ body[data-motion="true"] .mascot {
 
 .donate-grid {
   display: grid;
-  grid-template-columns: minmax(310px, 0.82fr) minmax(420px, 1.18fr);
+  grid-template-columns: minmax(520px, 0.98fr) minmax(420px, 1.02fr);
   align-items: start;
   gap: 34px;
 }
@@ -325,6 +325,15 @@ body[data-motion="true"] .mascot {
   font-size: 14px;
   line-height: 1.55;
   overflow-wrap: anywhere;
+}
+
+@media (min-width: 901px) {
+  .address-value {
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    overflow-wrap: normal;
+  }
 }
 
 .donation-actions {
