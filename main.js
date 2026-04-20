@@ -22,7 +22,7 @@
       address: "REPLACE_WITH_DONATION_ADDRESS",
       explorer: {
         label: "View on Explorer",
-        href: "https://etherscan.io/",
+        href: "https://polkadot.subscan.io/account",
       },
       qr: {
         src: "assets/donation-qr.png",
@@ -115,7 +115,7 @@
     if (!link) return;
 
     node.textContent = link.label;
-    node.setAttribute("href", link.href);
+    node.setAttribute("href", buildExplorerHref(link.href, config.donate.address));
     node.setAttribute("target", "_blank");
     node.setAttribute("rel", "noreferrer");
   });
@@ -179,6 +179,21 @@ function setupAddressCopy(address) {
       if (status) status.textContent = "";
     }, 1800);
   });
+}
+
+function buildExplorerHref(baseHref, address) {
+  const href = String(baseHref || "").trim();
+  const value = String(address || "").trim();
+
+  if (!href || !value || href.includes(value)) {
+    return href;
+  }
+
+  if (href.includes("{address}")) {
+    return href.replace("{address}", encodeURIComponent(value));
+  }
+
+  return `${href.replace(/\/$/, "")}/${encodeURIComponent(value)}`;
 }
 
 async function copyText(text) {

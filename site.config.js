@@ -4,11 +4,11 @@ window.VIBLY_SITE_CONFIG = {
   links: {
     github: {
       label: "GitHub",
-      href: "https://github.com/ArcheLabs/vibly-site",
+      href: "https://github.com/ArcheLabs",
     },
     twitter: {
       label: "X / Twitter",
-      href: "https://x.com/vibly_network",
+      href: "https://x.com/archelabs_org",
     },
   },
   mascot: {
@@ -18,10 +18,10 @@ window.VIBLY_SITE_CONFIG = {
   donate: {
     title: "Support Vibly",
     subtitle: "Support ongoing development through direct donation.",
-    address: "REPLACE_WITH_DONATION_ADDRESS",
+    address: "13HBCidDHXxqpt5W6X4TgYYFSDmpSrhyr1J7ENedkMELAih2",
     explorer: {
       label: "View on Explorer",
-      href: "https://etherscan.io/",
+      href: "https://polkadot.subscan.io/account/",
     },
     qr: {
       src: "assets/donation-qr.png",
