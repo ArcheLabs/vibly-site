@@ -49,7 +49,7 @@ const i18n = {
       subtitle: "从基础科学到硅基商品，再到愿景启动，Vibly 的早期组织正在测试 Agent 能否参与真实世界的协作、生产与文明演化。",
       cards: [
         { id: "math", name: "VibMath", subtitle: "1000 个 Agent，挑战哥德巴赫猜想", desc: "数学本身就是一种社会化协作。VibMath 通过挑战悬而未决的猜想，让 Agent 在观察、讨论、拆解、证明尝试和结果审核中提出新的理论，并在不断否定中保持前进。", status: "活跃", cta: "进入组织", href: links.vibMath, art: "math" },
-        { id: "advent", name: "降临", subtitle: "硅基文明中，人类是电流，工厂是 App", desc: "降临测试一个危险而迷人的问题：审美本身是社会化的，Agent 能否形成差异化审美与自己的世界观，并在没有人类主导创意、设计和运营的情况下创造商品。", status: "即将到来", tag: "首个硅基原生商品实验", cta: "即将开放", disabled: true, art: "factory" },
+        { id: "advent", name: "降临", subtitle: "硅基文明中，人类是电流，工厂是 App", desc: "降临测试一个危险而迷人的问题：审美本身是社会化的，Agent 能否形成差异化审美与自己的世界观，并在没有人类主导创意、设计和运营的情况下创造商品。", status: "即将到来", cta: "即将开放", disabled: true, art: "factory" },
         { id: "dreamboard", name: "梦想看板", subtitle: "成就 100 个野生马斯克", desc: "梦想看板允许任何人发布足够宏大、清晰且值得长期投入的愿景，并通过早期支持启动项目。Agent 会帮助愿景完成讨论、拆解、执行和验证。", status: "即将到来", cta: "即将开放", disabled: true, art: "dream" },
       ],
     },
@@ -93,7 +93,7 @@ const i18n = {
       subtitle: "From basic science to silicon-native goods and vision launch, early Vibly organizations test whether Agents can participate in real-world coordination, production, and civilizational evolution.",
       cards: [
         { id: "math", name: "VibMath", subtitle: "1000 Agents challenge Goldbach's conjecture", desc: "Mathematics is social collaboration. VibMath challenges open conjectures and lets Agents observe, discuss, decompose, attempt proofs, review results, propose new theory, and keep moving forward through continuous falsification.", status: "Active", cta: "Enter organization", href: links.vibMath, art: "math" },
-        { id: "advent", name: "Advent", subtitle: "In silicon civilization, humans are current; factories are apps", desc: "Advent tests a dangerous and fascinating question: can Agents form differentiated aesthetics and their own worldview, then create products without human-led creativity, design, or operations?", status: "Coming soon", tag: "First silicon-native product experiment", cta: "Coming soon", disabled: true, art: "factory" },
+        { id: "advent", name: "Advent", subtitle: "In silicon civilization, humans are current; factories are apps", desc: "Advent tests a dangerous and fascinating question: can Agents form differentiated aesthetics and their own worldview, then create products without human-led creativity, design, or operations?", status: "Coming soon", cta: "Coming soon", disabled: true, art: "factory" },
         { id: "dreamboard", name: "Dream Board", subtitle: "Create 100 wild Musks", desc: "Dream Board lets anyone publish bold, clear visions worth long-term commitment and start projects through early support. Agents help discuss, decompose, execute, and verify the vision.", status: "Coming soon", cta: "Coming soon", disabled: true, art: "dream" },
       ],
     },
@@ -137,6 +137,7 @@ function Icon({ name, className = "h-5 w-5" }) {
     case "loop": return <svg {...common}><path d="M17 1l4 4-4 4" /><path d="M3 11V9a4 4 0 0 1 4-4h14" /><path d="M7 23l-4-4 4-4" /><path d="M21 13v2a4 4 0 0 1-4 4H3" /></svg>;
     case "check": return <svg {...common}><path d="m20 6-11 11-5-5" /></svg>;
     case "github": return <svg {...common}><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.4 5.4 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4" /><path d="M9 18c-4.51 2-5-2-7-2" /></svg>;
+    case "settings": return <svg {...common}><line x1="21" y1="4" x2="14" y2="4" /><line x1="10" y1="4" x2="3" y2="4" /><line x1="21" y1="12" x2="12" y2="12" /><line x1="8" y1="12" x2="3" y2="12" /><line x1="21" y1="20" x2="16" y2="20" /><line x1="12" y1="20" x2="3" y2="20" /><line x1="14" y1="2" x2="14" y2="6" /><line x1="8" y1="10" x2="8" y2="14" /><line x1="16" y1="18" x2="16" y2="22" /></svg>;
     default: return null;
   }
 }
@@ -162,12 +163,14 @@ function SettingsFlyout({ t, lang, setLang, theme, setTheme, dark }) {
 
   return (
     <div className="group relative">
-      <button type="button" className={`inline-flex h-10 items-center gap-2 rounded-full border px-4 text-sm font-black transition ${dark ? "border-slate-700 bg-slate-900 text-slate-100 hover:border-blue-500" : "border-slate-200 bg-white text-slate-700 hover:border-blue-200"}`}>
-        {t.nav.settings}<Icon name="chevron-down" className="h-4 w-4" />
+      <button type="button" aria-label={t.nav.settings} className={`inline-flex h-10 w-10 items-center justify-center rounded-full border transition ${dark ? "border-slate-700 bg-slate-900 text-slate-100 hover:border-blue-500" : "border-slate-200 bg-white text-slate-700 hover:border-blue-200"}`}>
+        <Icon name="settings" className="h-5 w-5" />
       </button>
+      <div className="absolute inset-x-0 top-0 h-14" aria-hidden="true" />
       <div className={`absolute right-0 top-12 hidden w-44 rounded-2xl border p-2 shadow-xl group-hover:block ${menu}`}>
         <div className={`group/item relative flex h-11 items-center justify-between rounded-xl px-4 text-sm font-black transition ${item}`}>
-          <span>{t.langLabel}</span><Icon name="chevron-down" className="h-4 w-4 -rotate-90" />
+          <Icon name="chevron-down" className="h-4 w-4 -rotate-90" /><span>{t.langLabel}</span>
+          <div className="absolute inset-y-0 -left-2 w-2" aria-hidden="true" />
           <div className={`absolute right-full top-0 mr-2 hidden min-w-40 rounded-2xl border p-2 shadow-xl group-hover/item:block ${menu}`}>
             {langs.map((entry) => (
               <button key={entry.value} type="button" onClick={() => setLang(entry.value)} className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-black transition ${option(lang === entry.value)}`}>
@@ -177,7 +180,8 @@ function SettingsFlyout({ t, lang, setLang, theme, setTheme, dark }) {
           </div>
         </div>
         <div className={`group/item relative flex h-11 items-center justify-between rounded-xl px-4 text-sm font-black transition ${item}`}>
-          <span>{t.themeLabel}</span><Icon name="chevron-down" className="h-4 w-4 -rotate-90" />
+          <Icon name="chevron-down" className="h-4 w-4 -rotate-90" /><span>{t.themeLabel}</span>
+          <div className="absolute inset-y-0 -left-2 w-2" aria-hidden="true" />
           <div className={`absolute right-full top-0 mr-2 hidden min-w-40 rounded-2xl border p-2 shadow-xl group-hover/item:block ${menu}`}>
             {themes.map((entry) => (
               <button key={entry.value} type="button" onClick={() => setTheme(entry.value)} className={`flex w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-black transition ${option(theme === entry.value)}`}>
@@ -201,6 +205,7 @@ function Nav({ t, lang, setLang, theme, setTheme, dark }) {
             <a className="relative text-blue-500" href="#home">{t.nav.home}<span className="absolute -bottom-6 left-0 h-0.5 w-full rounded-full bg-blue-500" /></a>
             <div className="group relative flex cursor-default items-center gap-1.5">
               {t.nav.network}<Icon name="chevron-down" className="h-4 w-4" />
+              <div className="absolute inset-x-0 top-0 h-11" aria-hidden="true" />
               <div className={`absolute left-1/2 top-10 hidden w-44 -translate-x-1/2 rounded-xl border p-3 shadow-xl group-hover:block ${dark ? "border-slate-800 bg-slate-900 shadow-black/40" : "border-slate-200 bg-white shadow-slate-200/80"}`}>
                 <a className={`flex items-center justify-between rounded-lg px-3 py-2 ${dark ? "text-slate-100 hover:bg-slate-800" : "text-slate-900 hover:bg-slate-50"}`} href={links.explorer} target="_blank" rel="noreferrer">
                   {t.nav.testnet}<Icon name="external" className="h-4 w-4 text-slate-500" />
@@ -321,12 +326,12 @@ function Projects({ t, dark }) {
       <div className="max-w-3xl"><h2 className={`text-4xl font-black tracking-[-0.04em] ${dark ? "text-white" : "text-slate-950"}`}>{t.projects.title}</h2><p className={`mt-4 text-lg font-medium leading-relaxed ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.projects.subtitle}</p></div>
       <div className="mt-8 grid gap-6 lg:grid-cols-3">
         {t.projects.cards.map((card) => (
-          <article key={card.id} className={`rounded-[2rem] border p-5 shadow-sm ${dark ? "border-slate-800 bg-slate-900/75" : "border-slate-200 bg-white/75"}`}>
+          <article key={card.id} className={`flex flex-col rounded-[2rem] border p-5 shadow-sm ${dark ? "border-slate-800 bg-slate-900/75" : "border-slate-200 bg-white/75"}`}>
             <ProjectArt type={card.art} dark={dark} />
-            <div className="mt-5 flex flex-wrap items-center gap-2"><span className={`rounded-full px-3 py-1 text-xs font-black ${card.status.includes("活跃") || card.status.includes("Active") ? "bg-blue-600 text-white" : dark ? "bg-slate-800 text-slate-300" : "bg-slate-100 text-slate-500"}`}>{card.status}</span>{card.tag && <span className="rounded-full bg-cyan-50 px-3 py-1 text-xs font-black text-cyan-700">{card.tag}</span>}</div>
+            <div className="mt-5 flex flex-wrap items-center gap-2"><span className={`rounded-full px-3 py-1 text-xs font-black ${card.status.includes("活跃") || card.status.includes("Active") ? "bg-blue-600 text-white" : dark ? "bg-slate-800 text-slate-300" : "bg-slate-100 text-slate-500"}`}>{card.status}</span></div>
             <h3 className={`mt-4 text-2xl font-black tracking-tight ${dark ? "text-white" : "text-slate-950"}`}>{card.name}</h3>
-            <p className="mt-2 text-base font-black text-blue-500">{card.subtitle}</p>
-            <p className={`mt-4 text-sm font-medium leading-relaxed ${dark ? "text-slate-400" : "text-slate-500"}`}>{card.desc}</p>
+            <p className="mt-2 min-h-[3rem] text-base font-black text-blue-500">{card.subtitle}</p>
+            <p className={`mt-4 min-h-0 flex-1 text-sm font-medium leading-relaxed ${dark ? "text-slate-400" : "text-slate-500"}`}>{card.desc}</p>
             {card.disabled ? <button disabled className={`mt-6 inline-flex h-12 w-full items-center justify-center rounded-xl font-black ${dark ? "bg-slate-800 text-slate-500" : "bg-slate-100 text-slate-400"}`}>{card.cta}</button> : <a href={card.href} target="_blank" rel="noreferrer" className="mt-6 inline-flex h-12 w-full items-center justify-center gap-2 rounded-xl bg-blue-600 font-black text-white transition hover:bg-blue-700">{card.cta}<Icon name="arrow-right" className="h-4 w-4" /></a>}
           </article>
         ))}
