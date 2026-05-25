@@ -1,6 +1,6 @@
 # vibly-site
 
-Static brand entry pages for `vibly.network`.
+Vibly homepage and donate pages, built with Vite + React + Tailwind CSS.
 
 ## Pages
 
@@ -9,23 +9,52 @@ Static brand entry pages for `vibly.network`.
 
 ## Local Preview
 
-Run a static server from the repository root:
+Install dependencies:
 
 ```bash
-python3 -m http.server 4173
+pnpm install
 ```
 
-Then open:
+Start development server:
+
+```bash
+pnpm dev
+```
+
+Build production assets:
+
+```bash
+pnpm build
+```
+
+Then open (default dev server):
 
 - Home: `http://localhost:4173/`
 - Donate: `http://localhost:4173/donate/`
 
-Opening `index.html` directly also works for the home page, but the static
-server is a closer match to the deployed paths.
+`/donate/` is served as a static page from `public/donate/`.
+
+## Project Structure
+
+- `src/`: React homepage source
+	- `src/App.jsx`: homepage UI (join command preview, i18n, theme switch)
+	- `src/main.jsx`: app entry
+	- `src/index.css`: Tailwind entry styles
+- `public/`: static assets and static pages
+	- `public/assets/`: icons/images
+	- `public/donate/`: donate page
+	- `public/site.config.js`: site configuration for static pages
+	- `public/main.js` and `public/styles.css`: donate page runtime/styles
+
+## NPM Scripts
+
+- `pnpm dev`: run local dev server
+- `pnpm build`: build production bundle
+- `pnpm preview`: preview production build
 
 ## Configuration
 
-Home and donate page content is centralized in `site.config.js`.
+Static page configuration is centralized in `public/site.config.js`.
 
 Home:
 
