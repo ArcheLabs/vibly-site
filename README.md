@@ -1,6 +1,6 @@
 # vibly-site
 
-Vibly homepage and donate pages, built with Vite + React + Tailwind CSS.
+Vibly homepage, built with Vite + React + Tailwind CSS.
 
 ## Pages
 

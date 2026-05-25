@@ -1,6 +1,6 @@
 # vibly-site
 
-Vibly 首页与捐赠页面，基于 Vite + React + Tailwind CSS 构建。
+Vibly 首页，基于 Vite + React + Tailwind CSS 构建。
 
 ## 页面
 
