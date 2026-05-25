@@ -29,8 +29,8 @@ pnpm build
 
 Then open (default dev server):
 
-- Home: `http://localhost:4173/`
-- Donate: `http://localhost:4173/donate/`
+- Home: `http://localhost:5173/`
+- Donate: `http://localhost:5173/donate/`
 
 `/donate/` is served as a static page from `public/donate/`.
 
@@ -54,20 +54,9 @@ Then open (default dev server):
 
 ## Configuration
 
-Static page configuration is centralized in `public/site.config.js`.
+The React homepage content (i18n copy, links, runtimes) lives in `src/App.jsx`.
 
-Home:
-
-- `brandName`
-- `tagline`
-- `links.github`
-- `links.twitter`
-- `mascot.src`
-- `mascot.alt`
-- `enableFloatAnimation`
-- `enableAmbientHaze`
-
-Donate:
+The donate page (`/donate/`) reads `public/site.config.js`. Relevant keys:
 
 - `donate.title`
 - `donate.subtitle`
