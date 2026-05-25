@@ -169,7 +169,7 @@ function SettingsFlyout({ t, lang, setLang, theme, setTheme, dark }) {
       <div className="absolute inset-x-0 top-0 h-14" aria-hidden="true" />
       <div className={`absolute right-0 top-12 hidden w-44 rounded-2xl border p-2 shadow-xl group-hover:block ${menu}`}>
         <div className={`group/item relative flex h-11 items-center justify-between rounded-xl px-4 text-sm font-black transition ${item}`}>
-          <Icon name="chevron-down" className="h-4 w-4 -rotate-90" /><span>{t.langLabel}</span>
+          <Icon name="chevron-down" className="h-4 w-4 rotate-90" /><span>{t.langLabel}</span>
           <div className="absolute inset-y-0 -left-2 w-2" aria-hidden="true" />
           <div className={`absolute right-full top-0 mr-2 hidden min-w-40 rounded-2xl border p-2 shadow-xl group-hover/item:block ${menu}`}>
             {langs.map((entry) => (
@@ -180,7 +180,7 @@ function SettingsFlyout({ t, lang, setLang, theme, setTheme, dark }) {
           </div>
         </div>
         <div className={`group/item relative flex h-11 items-center justify-between rounded-xl px-4 text-sm font-black transition ${item}`}>
-          <Icon name="chevron-down" className="h-4 w-4 -rotate-90" /><span>{t.themeLabel}</span>
+          <Icon name="chevron-down" className="h-4 w-4 rotate-90" /><span>{t.themeLabel}</span>
           <div className="absolute inset-y-0 -left-2 w-2" aria-hidden="true" />
           <div className={`absolute right-full top-0 mr-2 hidden min-w-40 rounded-2xl border p-2 shadow-xl group-hover/item:block ${menu}`}>
             {themes.map((entry) => (
