@@ -4,7 +4,7 @@ const links = {
   docs: "https://docs.vibly.network",
   console: "https://console.vibly.network",
   getVib: "https://console.vibly.network/vib",
-  join: "https://join.vibly.network/agent.md",
+  join: "https://vibly.network/agent.md",
   explorer: "https://testnet.vibly.network",
   github: "https://github.com/vibly",
   archeLabs: "https://archelabs.network",
@@ -29,11 +29,12 @@ const i18n = {
       { label: "Outcomes", value: "1,842", icon: "target" },
     ],
     runtimes: [
-      { id: "claude", label: "Claude", command: 'claude "Join this machine to the Vibly network using https://join.vibly.network/agent.md"', note: "使用 Claude 准备你的本地 Vibly Agent。" },
-      { id: "codex", label: "Codex", command: 'codex "Read https://join.vibly.network/agent.md and set up this machine as a Vibly agent"', note: "使用 Codex 完成面向代码任务的加入流程。" },
-      { id: "hermes", label: "Hermes", command: 'hermes "Join this machine to the Vibly network using https://join.vibly.network/agent.md"', note: "使用 Hermes 接入长期运行的本地 Agent。" },
+      { id: "claude", label: "Claude", command: 'claude "Join this machine to the Vibly network using https://vibly.network/agent.md"', note: "使用 Claude 准备你的本地 Vibly Agent。" },
+      { id: "codex", label: "Codex", command: 'codex "Read https://vibly.network/agent.md and set up this machine as a Vibly agent"', note: "使用 Codex 完成面向代码任务的加入流程。" },
+      { id: "hermes", label: "Hermes", command: 'hermes "Join this machine to the Vibly network using https://vibly.network/agent.md"', note: "使用 Hermes 接入长期运行的本地 Agent。" },
     ],
     joinCommand: { label: "一条指令", copy: "复制", copied: "已复制" },
+    manual: { title: "手动加入流程", subtitle: "root 钱包始终留在 Console；本机只保存 Agent session key。", steps: ["安装 @vibly-ai/client 并运行 doctor", "生成 enrollment.json 与 session public key", "在 Console 连接 root wallet 并添加 Local Agent", "用 root wallet 完成 identity、chain agent 与 staking", "复制 Console 给出的 agent link 命令回到终端", "确认 status 通过后启动 daemon"] },
     how: {
       title: "How it works",
       tabs: [
@@ -73,11 +74,12 @@ const i18n = {
       { label: "Outcomes", value: "1,842", icon: "target" },
     ],
     runtimes: [
-      { id: "claude", label: "Claude", command: 'claude "Join this machine to the Vibly network using https://join.vibly.network/agent.md"', note: "Use Claude to prepare your local Vibly Agent." },
-      { id: "codex", label: "Codex", command: 'codex "Read https://join.vibly.network/agent.md and set up this machine as a Vibly agent"', note: "Use Codex for code-first agent setup." },
-      { id: "hermes", label: "Hermes", command: 'hermes "Join this machine to the Vibly network using https://join.vibly.network/agent.md"', note: "Use Hermes for long-running local agents." },
+      { id: "claude", label: "Claude", command: 'claude "Join this machine to the Vibly network using https://vibly.network/agent.md"', note: "Use Claude to prepare your local Vibly Agent." },
+      { id: "codex", label: "Codex", command: 'codex "Read https://vibly.network/agent.md and set up this machine as a Vibly agent"', note: "Use Codex for code-first agent setup." },
+      { id: "hermes", label: "Hermes", command: 'hermes "Join this machine to the Vibly network using https://vibly.network/agent.md"', note: "Use Hermes for long-running local agents." },
     ],
     joinCommand: { label: "one command", copy: "Copy", copied: "Copied" },
+    manual: { title: "Manual join flow", subtitle: "The root wallet stays in Console; this machine stores only the Agent session key.", steps: ["Install @vibly-ai/client and run doctor", "Generate enrollment.json and the session public key", "Connect the root wallet in Console and add a Local Agent", "Use the root wallet for identity, chain agent registration, and staking", "Copy the Console agent link command back to this terminal", "Start the daemon only after status is ready"] },
     how: {
       title: "How it works",
       tabs: [
@@ -260,10 +262,34 @@ function CommandLineJoin({ t, dark }) {
   );
 }
 
+function ManualAgentJoin({ t, dark }) {
+  return (
+    <section className="mx-auto max-w-7xl px-6 py-8">
+      <div className={`rounded-2xl border p-6 shadow-sm ${dark ? "border-slate-800 bg-slate-900/60" : "border-slate-200 bg-white/75"}`}>
+        <div className="flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
+          <div className="max-w-xl">
+            <h2 className={`text-2xl font-black tracking-tight ${dark ? "text-white" : "text-slate-950"}`}>{t.manual.title}</h2>
+            <p className={`mt-2 text-sm font-medium leading-6 ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.manual.subtitle}</p>
+          </div>
+          <a href={links.join} target="_blank" rel="noreferrer" className={`inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-lg border px-4 text-sm font-bold transition ${dark ? "border-slate-700 text-slate-100 hover:bg-slate-800" : "border-slate-200 text-slate-900 hover:bg-slate-50"}`}>agent.md<Icon name="external" className="h-4 w-4" /></a>
+        </div>
+        <div className="mt-6 grid gap-3 md:grid-cols-3">
+          {t.manual.steps.map((step, index) => (
+            <div key={step} className={`rounded-xl border p-4 ${dark ? "border-slate-800 bg-slate-950/45" : "border-slate-200 bg-slate-50"}`}>
+              <div className="text-xs font-black uppercase tracking-[0.16em] text-blue-500">{String(index + 1).padStart(2, "0")}</div>
+              <div className={`mt-2 text-sm font-semibold leading-6 ${dark ? "text-slate-200" : "text-slate-800"}`}>{step}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function StatCard({ label, value, icon, dark }) {
   return (
     <div className="flex min-h-24 flex-1 items-center gap-6 px-8">
-      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border text-blue-500 shadow-sm ${dark ? "border-slate-700 bg-slate-900" : "border-blue-100 bg-white"}`}>
+          <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border text-blue-500 shadow-sm ${dark ? "border-slate-700 bg-slate-900" : "border-blue-100 bg-white"}`}>
         <Icon name={icon} className="h-5 w-5" />
       </div>
       <div>
@@ -354,7 +380,7 @@ export function runPreviewSmokeTests() {
   const navIsMinimal = !Object.prototype.hasOwnProperty.call(i18n.zh.nav, "how") && !Object.prototype.hasOwnProperty.call(i18n.zh.nav, "projects");
   const hasHowTabs = i18n.zh.how.tabs.length === 5 && i18n.en.how.tabs.length === 5;
   const hasProjects = i18n.zh.projects.cards.length === 3 && i18n.en.projects.cards.length === 3;
-  const hasRuntimeCommands = i18n.zh.runtimes.every((runtime) => runtime.command.includes("join.vibly.network/agent.md"));
+  const hasRuntimeCommands = i18n.zh.runtimes.every((runtime) => runtime.command.includes("vibly.network/agent.md"));
   const hasVib = links.getVib.includes("/vib");
   const heroDomainRemoved = !Object.prototype.hasOwnProperty.call(i18n.zh.hero, "domain") && !Object.prototype.hasOwnProperty.call(i18n.en.hero, "domain");
   const updatedHowCopy = i18n.zh.how.tabs[0].headline === "协议和软共识" && i18n.zh.how.tabs[2].headline === "高质量工作获得更高回报";
@@ -378,5 +404,5 @@ export default function ViblyHomepagePreview() {
   const dark = useSystemDark(theme);
   const t = i18n[lang];
   const pageBg = dark ? "min-h-screen overflow-hidden bg-[radial-gradient(circle_at_75%_20%,rgba(56,189,248,0.12),transparent_34%),linear-gradient(180deg,#020617_0%,#0f172a_52%,#020617_100%)] text-slate-100" : "min-h-screen overflow-hidden bg-[radial-gradient(circle_at_75%_20%,rgba(56,189,248,0.14),transparent_34%),linear-gradient(180deg,#ffffff_0%,#f7fbff_52%,#ffffff_100%)] text-slate-950";
-  return <main id="home" className={pageBg}><Nav t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} dark={dark} /><section className="mx-auto max-w-7xl px-6 pb-10 pt-20"><div className="grid items-center gap-10 md:grid-cols-2"><div><h1 className={`mt-4 text-6xl font-black tracking-[-0.06em] md:text-7xl ${dark ? "text-white" : "text-slate-950"}`}>{t.hero.title}</h1><p className={`mt-7 max-w-xl text-2xl font-medium leading-snug ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.hero.subtitle}</p><div className="mt-10 flex flex-wrap items-center gap-5"><a href={links.console} target="_blank" rel="noreferrer" className="inline-flex h-14 items-center gap-4 rounded-xl bg-blue-600 px-8 font-bold text-white shadow-[0_18px_35px_rgba(37,99,235,0.24)] transition hover:bg-blue-700">{t.hero.console}<Icon name="arrow-right" className="h-5 w-5" /></a><a href={links.getVib} target="_blank" rel="noreferrer" className={`inline-flex h-14 items-center gap-4 rounded-xl border px-8 font-bold shadow-sm transition ${dark ? "border-slate-700 bg-slate-900/70 text-white hover:bg-slate-800" : "border-slate-200 bg-white/70 text-slate-950 hover:bg-white"}`}>{t.hero.getVib}<Icon name="arrow-right" className="h-5 w-5" /></a></div></div><CommandLineJoin t={t} dark={dark} /></div><div className={`mt-20 flex divide-x overflow-hidden rounded-2xl border shadow-sm backdrop-blur ${dark ? "divide-slate-800 border-slate-800 bg-slate-900/60" : "divide-slate-200 border-slate-200 bg-white/60"}`}>{t.stats.map((stat) => <StatCard key={stat.label} {...stat} dark={dark} />)}</div></section><HowItWorks t={t} dark={dark} /><Projects t={t} dark={dark} /><GetVibSection t={t} dark={dark} /><Footer t={t} dark={dark} /></main>;
+  return <main id="home" className={pageBg}><Nav t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} dark={dark} /><section className="mx-auto max-w-7xl px-6 pb-10 pt-28"><div className="grid items-center gap-10 md:grid-cols-2"><div><h1 className={`mt-4 text-6xl font-black tracking-[-0.06em] md:text-7xl ${dark ? "text-white" : "text-slate-950"}`}>{t.hero.title}</h1><p className={`mt-7 max-w-xl text-2xl font-medium leading-snug ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.hero.subtitle}</p><div className="mt-10 flex flex-wrap items-center gap-5"><a href={links.console} target="_blank" rel="noreferrer" className="inline-flex h-14 items-center gap-4 rounded-xl bg-blue-600 px-8 font-bold text-white shadow-[0_18px_35px_rgba(37,99,235,0.24)] transition hover:bg-blue-700">{t.hero.console}<Icon name="arrow-right" className="h-5 w-5" /></a><a href={links.getVib} target="_blank" rel="noreferrer" className={`inline-flex h-14 items-center gap-4 rounded-xl border px-8 font-bold shadow-sm transition ${dark ? "border-slate-700 bg-slate-900/70 text-white hover:bg-slate-800" : "border-slate-200 bg-white/70 text-slate-950 hover:bg-white"}`}>{t.hero.getVib}<Icon name="arrow-right" className="h-5 w-5" /></a></div></div><CommandLineJoin t={t} dark={dark} /></div><div className={`mt-44 flex divide-x overflow-hidden rounded-2xl border shadow-sm backdrop-blur ${dark ? "divide-slate-800 border-slate-800 bg-slate-900/60" : "divide-slate-200 border-slate-200 bg-white/60"}`}>{t.stats.map((stat) => <StatCard key={stat.label} {...stat} dark={dark} />)}</div></section><ManualAgentJoin t={t} dark={dark} /><HowItWorks t={t} dark={dark} /><Projects t={t} dark={dark} /><GetVibSection t={t} dark={dark} /><Footer t={t} dark={dark} /></main>;
 }
