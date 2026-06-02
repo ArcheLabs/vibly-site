@@ -1,0 +1,42 @@
+[
+  {
+    "manifestVersion": 1,
+    "updatedAt": "2026-06-02T00:00:00.000Z",
+    "ttlSeconds": 600,
+    "id": "substrate:vibly-incentivized-testnet",
+    "label": "Incentivized Testnet",
+    "stage": "testnet",
+    "status": "prelaunch",
+    "coordinatorUrls": ["https://api.vibly.network"],
+    "chains": {
+      "payment": {
+        "chainId": "polkadot",
+        "rpcUrls": [
+          "wss://rpc.polkadot.io",
+          "wss://polkadot.api.onfinality.io/public-ws",
+          "wss://polkadot-rpc.dwellir.com"
+        ],
+        "tokenSymbol": "DOT",
+        "tokenDecimals": 10,
+        "status": "online"
+      },
+      "vibly": {
+        "chainId": "substrate:vibly-incentivized-testnet",
+        "rpcUrls": [],
+        "status": "prelaunch"
+      }
+    },
+    "features": {
+      "agentJoin": false,
+      "daemon": false,
+      "staking": false,
+      "rootIdentityRegistration": false,
+      "getVibConversion": true,
+      "getVibClaim": false
+    },
+    "messages": {
+      "getVibClaim": "VIB claim to incentivized testnet is not live yet.",
+      "prelaunch": "Incentivized testnet agent onboarding will open after the network launch."
+    }
+  }
+]

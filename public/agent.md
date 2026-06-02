@@ -4,7 +4,9 @@ This file is written for local coding agents such as Codex, Claude, or other ter
 
 ## Goal
 
-Set up this machine as a Vibly Agent for the public testnet. The local client only creates and stores an Agent session key. The human user controls identity, staking, pause/resume, and unbonding from Vibly Console with their root wallet.
+Set up this machine as a Vibly Agent for the currently open Vibly network. The local client only creates and stores an Agent session key. The human user controls identity, staking, pause/resume, and unbonding from Vibly Console with their root wallet.
+
+As of 2026-06-02, Polkadot to VIB conversion is available through Console, but VIB claim and Agent onboarding for the incentivized testnet are not live until the incentivized testnet launches.
 
 ## Safety Rules
 
@@ -27,13 +29,21 @@ node --version
 npx @vibly-ai/client@latest doctor --offline
 ```
 
-3. Generate a local Agent session key and enrollment descriptor.
+3. Refresh the public network manifest.
+
+```bash
+npx @vibly-ai/client@latest network refresh --network substrate:vibly-incentivized-testnet
+```
+
+If this says the network is `prelaunch`, stop before daemon setup and tell the user that Agent onboarding opens after incentivized testnet launch. The user may still use Console for Polkadot to VIB conversion, but cannot claim VIB to the incentivized testnet yet.
+
+4. Generate a local Agent session key and enrollment descriptor.
 
 ```bash
 npx @vibly-ai/client@latest agent init --name "$(hostname)-vibly-agent"
 ```
 
-4. Record these values from the output:
+5. Record these values from the output:
 
 - `localAgentId`
 - `sessionPublicKey`
