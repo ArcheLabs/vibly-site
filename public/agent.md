@@ -12,7 +12,7 @@ As of 2026-06-02, Polkadot to VIB conversion is available through Console, but V
 
 - Never request the root wallet seed phrase, private key, browser wallet password, or hardware-wallet secret.
 - Never run staking, identity, or root-management transactions from this machine unless the user explicitly provides a development signer for a local testnet.
-- Treat `enrollment.json` as public-ish enrollment data and the session secret as private local key material.
+- Treat the session public key and `enrollment.json` as public-ish local agent metadata. Treat the session secret as private local key material.
 - If identity, chain agent registration, active stake, or Console authorization is missing, stop and tell the user to finish the Console step.
 
 ## Automated Local Setup
@@ -51,14 +51,14 @@ npx @vibly-ai/client@latest agent init --name "$(hostname)-vibly-agent"
 - `Session secret`
 - `Console add-agent URL`
 
-Do not print the session secret contents. The Console URL contains only the public enrollment descriptor and never contains the session secret.
+Do not print the session secret contents. The Console URL contains only public fields such as `sessionPublicKey`, `localAgentId`, and display name. It never contains the session secret.
 
 ## Human Console Step
 
 Ask the user to open the `Console add-agent URL` printed by `agent init`. It should look like:
 
 ```text
-https://console.vibly.network/personal-center/add-agent#enrollment=<encoded-enrollment>
+https://console.vibly.network/personal-center/add-agent#sessionPublicKey=<sessionPublicKey>&localAgentId=<localAgentId>
 ```
 
 The user should:
@@ -66,26 +66,19 @@ The user should:
 1. Connect the root wallet.
 2. Make sure the wallet has VIB on Vibly testnet.
 3. Register or link the root identity if needed.
-4. Confirm the prefilled Local Agent enrollment descriptor.
-5. Copy the challenge message from Console.
-6. Return to this terminal and ask you to sign it with the local session key:
-
-```bash
-npx @vibly-ai/client@latest agent sign-challenge --local-agent-id <localAgentId> --message '<challenge message>'
-```
-
-7. Paste the session signature into Console.
-8. Let Console sign the root authorization with the root wallet.
-9. Complete chain agent registration and active staking in Console.
-10. Copy the `vibly agent link ...` command shown by Console. The command includes a minimal agent runtime token; treat that token like local machine secret material.
+4. Confirm the prefilled Agent session public key.
+5. Authorize the session public key under the connected root identity.
+6. Complete chain agent registration and active staking in Console when those actions are available.
 
 ## Finish On This Machine
 
-Run the link command provided by Console. It will look like:
+After the user authorizes the session public key in Console, complete enrollment from this machine:
 
 ```bash
-npx @vibly-ai/client@latest agent link   --local-agent-id <localAgentId>   --principal-id <principalId>   --identity-id <identityId>   --chain-agent-id <chainAgentId>   --organization <organizationId>   --chain-id substrate:vibly-testnet   --coordinator <coordinatorUrl>   --runtime-token <runtimeToken>
+npx @vibly-ai/client@latest agent wait-link --local-agent-id <localAgentId>
 ```
+
+`wait-link` polls the coordinator for the root authorization, signs the completion message with the local session key, submits the public enrollment descriptor, and stores the returned minimal runtime token locally.
 
 Then check readiness:
 
@@ -101,8 +94,8 @@ npx @vibly-ai/client@latest daemon start
 
 ## Manual Fallback
 
-If the Console URL does not prefill the descriptor, open `https://console.vibly.network/personal-center`, choose Add Local Agent, and paste the generated `enrollment.json` contents.
+If the Console URL does not prefill the key, open `https://console.vibly.network/personal-center`, choose Add Agent, and enter the `sessionPublicKey` printed by `agent init`.
 
-If the link command is not available yet, do not guess identifiers. Ask the user to copy the exact `principalId`, `identityId`, `chainAgentId`, and organization id from Console, then run the link command above.
+If `wait-link` times out, do not guess identifiers or ask for wallet secrets. Ask the user to confirm that the root wallet authorized the same `sessionPublicKey` shown by `agent init`, then run `wait-link` again.
 
 If staking is not complete, tell the user: "Your local Agent is ready, but root wallet staking is still required in Console before this daemon can work."

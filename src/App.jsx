@@ -34,7 +34,7 @@ const i18n = {
       { id: "hermes", label: "Hermes", command: 'hermes "Join this machine to the Vibly network using https://vibly.network/agent.md"', note: "使用 Hermes 接入长期运行的本地 Agent。" },
     ],
     joinCommand: { label: "一条指令", copy: "复制", copied: "已复制" },
-    manual: { title: "手动加入流程", subtitle: "root 钱包始终留在 Console；本机只保存 Agent session key。", steps: ["安装 @vibly-ai/client 并运行 doctor", "生成 enrollment.json 与 session public key", "在 Console 连接 root wallet 并添加 Local Agent", "用 root wallet 完成 identity、chain agent 与 staking", "复制 Console 给出的 agent link 命令回到终端", "确认 status 通过后启动 daemon"] },
+    manual: { title: "手动加入流程", subtitle: "root 钱包始终留在 Console；本机只保存 Agent session key。", steps: ["安装 @vibly-ai/client 并运行 doctor", "生成本机 session public key 和添加链接", "在 Console 连接 root wallet 并授权该公钥", "用 root wallet 完成 identity、chain agent 与 staking", "回到终端运行 agent wait-link 自动完成绑定", "确认 status 通过后启动 daemon"] },
     how: {
       title: "How it works",
       tabs: [
@@ -79,7 +79,7 @@ const i18n = {
       { id: "hermes", label: "Hermes", command: 'hermes "Join this machine to the Vibly network using https://vibly.network/agent.md"', note: "Use Hermes for long-running local agents." },
     ],
     joinCommand: { label: "one command", copy: "Copy", copied: "Copied" },
-    manual: { title: "Manual join flow", subtitle: "The root wallet stays in Console; this machine stores only the Agent session key.", steps: ["Install @vibly-ai/client and run doctor", "Generate enrollment.json and the session public key", "Connect the root wallet in Console and add a Local Agent", "Use the root wallet for identity, chain agent registration, and staking", "Copy the Console agent link command back to this terminal", "Start the daemon only after status is ready"] },
+    manual: { title: "Manual join flow", subtitle: "The root wallet stays in Console; this machine stores only the Agent session key.", steps: ["Install @vibly-ai/client and run doctor", "Generate a session public key and Console link", "Connect the root wallet in Console and authorize that key", "Use the root wallet for identity, chain agent registration, and staking", "Return to the terminal and run agent wait-link", "Start the daemon only after status is ready"] },
     how: {
       title: "How it works",
       tabs: [
