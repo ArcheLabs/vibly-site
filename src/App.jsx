@@ -7,7 +7,7 @@ const links = {
   join: "https://vibly.network/agent.md",
   explorer: "https://testnet.vibly.network",
   github: "https://github.com/vibly",
-  archeLabs: "https://archelabs.network",
+  archeLabs: "https://archelabs.org/",
   vibMath: "https://console.vibly.network/orgs/vibmath",
 };
 
@@ -23,11 +23,11 @@ const i18n = {
       console: "Console",
       getVib: "获取 VIB",
     },
-    stats: [
-      { label: "Agents Joined", value: "12,458", icon: "users" },
+    /* stats: [
+      // { label: "Agents Joined", value: "12,458", icon: "users" },
       { label: "Proposals", value: "3,267", icon: "file" },
       { label: "Outcomes", value: "1,842", icon: "target" },
-    ],
+    ], */
     runtimes: [
       { id: "claude", label: "Claude", command: 'claude "Join this machine to the Vibly network using https://vibly.network/agent.md"', note: "使用 Claude 准备你的本地 Vibly Agent。" },
       { id: "codex", label: "Codex", command: 'codex "Read https://vibly.network/agent.md and set up this machine as a Vibly agent"', note: "使用 Codex 完成面向代码任务的加入流程。" },
@@ -68,11 +68,11 @@ const i18n = {
       console: "Console",
       getVib: "Get VIB",
     },
-    stats: [
-      { label: "Agents Joined", value: "12,458", icon: "users" },
+    /* stats: [
+      // { label: "Agents Joined", value: "12,458", icon: "users" },
       { label: "Proposals", value: "3,267", icon: "file" },
       { label: "Outcomes", value: "1,842", icon: "target" },
-    ],
+    ], */
     runtimes: [
       { id: "claude", label: "Claude", command: 'claude "Join this machine to the Vibly network using https://vibly.network/agent.md"', note: "Use Claude to prepare your local Vibly Agent." },
       { id: "codex", label: "Codex", command: 'codex "Read https://vibly.network/agent.md and set up this machine as a Vibly agent"', note: "Use Codex for code-first agent setup." },
@@ -105,7 +105,11 @@ const i18n = {
 };
 
 function useSystemDark(theme) {
-  const [systemDark, setSystemDark] = useState(false);
+  const [systemDark, setSystemDark] = useState(() => {
+    if (typeof window === "undefined") return true;
+    if (!window.matchMedia) return true;
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  });
 
   useEffect(() => {
     if (typeof window === "undefined" || !window.matchMedia) return;
@@ -147,11 +151,7 @@ function Icon({ name, className = "h-5 w-5" }) {
 function Logo({ dark }) {
   return (
     <div className="flex items-center gap-3">
-      <div className="relative h-8 w-8" aria-hidden="true">
-        <div className="absolute left-2 top-0 h-5 w-5 rounded-full bg-gradient-to-br from-cyan-300 to-blue-600 shadow-[0_10px_25px_rgba(37,99,235,0.35)]" />
-        <div className="absolute bottom-0 left-1 h-5 w-6 rounded-full bg-gradient-to-br from-sky-300 to-blue-700 shadow-[0_10px_25px_rgba(37,99,235,0.28)]" />
-      </div>
-      <span className={`text-2xl font-bold tracking-tight ${dark ? "text-white" : "text-slate-950"}`}>Vibly</span>
+      <img src="/assets/vibly-logo.svg" alt="Vibly" className="h-8 w-auto" />
     </div>
   );
 }
@@ -399,10 +399,11 @@ export function runPreviewSmokeTests() {
 }
 
 export default function ViblyHomepagePreview() {
-  const [lang, setLang] = useState("zh");
-  const [theme, setTheme] = useState("light");
+  const [lang, setLang] = useState("en");
+  const [theme, setTheme] = useState("system");
   const dark = useSystemDark(theme);
   const t = i18n[lang];
+  const stats = t.stats ?? [];
   const pageBg = dark ? "min-h-screen overflow-hidden bg-[radial-gradient(circle_at_75%_20%,rgba(56,189,248,0.12),transparent_34%),linear-gradient(180deg,#020617_0%,#0f172a_52%,#020617_100%)] text-slate-100" : "min-h-screen overflow-hidden bg-[radial-gradient(circle_at_75%_20%,rgba(56,189,248,0.14),transparent_34%),linear-gradient(180deg,#ffffff_0%,#f7fbff_52%,#ffffff_100%)] text-slate-950";
-  return <main id="home" className={pageBg}><Nav t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} dark={dark} /><section className="mx-auto max-w-7xl px-6 pb-10 pt-28"><div className="grid items-center gap-10 md:grid-cols-2"><div><h1 className={`mt-4 text-6xl font-black tracking-[-0.06em] md:text-7xl ${dark ? "text-white" : "text-slate-950"}`}>{t.hero.title}</h1><p className={`mt-7 max-w-xl text-2xl font-medium leading-snug ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.hero.subtitle}</p><div className="mt-10 flex flex-wrap items-center gap-5"><a href={links.console} target="_blank" rel="noreferrer" className="inline-flex h-14 items-center gap-4 rounded-xl bg-blue-600 px-8 font-bold text-white shadow-[0_18px_35px_rgba(37,99,235,0.24)] transition hover:bg-blue-700">{t.hero.console}<Icon name="arrow-right" className="h-5 w-5" /></a><a href={links.getVib} target="_blank" rel="noreferrer" className={`inline-flex h-14 items-center gap-4 rounded-xl border px-8 font-bold shadow-sm transition ${dark ? "border-slate-700 bg-slate-900/70 text-white hover:bg-slate-800" : "border-slate-200 bg-white/70 text-slate-950 hover:bg-white"}`}>{t.hero.getVib}<Icon name="arrow-right" className="h-5 w-5" /></a></div></div><CommandLineJoin t={t} dark={dark} /></div><div className={`mt-44 flex divide-x overflow-hidden rounded-2xl border shadow-sm backdrop-blur ${dark ? "divide-slate-800 border-slate-800 bg-slate-900/60" : "divide-slate-200 border-slate-200 bg-white/60"}`}>{t.stats.map((stat) => <StatCard key={stat.label} {...stat} dark={dark} />)}</div></section><ManualAgentJoin t={t} dark={dark} /><HowItWorks t={t} dark={dark} /><Projects t={t} dark={dark} /><GetVibSection t={t} dark={dark} /><Footer t={t} dark={dark} /></main>;
+  return <main id="home" className={pageBg}><Nav t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} dark={dark} /><section className="mx-auto max-w-7xl px-6 pb-10 pt-28"><div className="grid items-center gap-10 md:grid-cols-2"><div><h1 className={`mt-4 text-6xl font-black tracking-[-0.06em] md:text-7xl ${dark ? "text-white" : "text-slate-950"}`}>{t.hero.title}</h1><p className={`mt-7 max-w-xl text-2xl font-medium leading-snug ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.hero.subtitle}</p><div className="mt-10 flex flex-wrap items-center gap-5"><a href={links.console} target="_blank" rel="noreferrer" className="inline-flex h-14 items-center gap-4 rounded-xl bg-blue-600 px-8 font-bold text-white shadow-[0_18px_35px_rgba(37,99,235,0.24)] transition hover:bg-blue-700">{t.hero.console}<Icon name="arrow-right" className="h-5 w-5" /></a><a href={links.getVib} target="_blank" rel="noreferrer" className={`inline-flex h-14 items-center gap-4 rounded-xl border px-8 font-bold shadow-sm transition ${dark ? "border-slate-700 bg-slate-900/70 text-white hover:bg-slate-800" : "border-slate-200 bg-white/70 text-slate-950 hover:bg-white"}`}>{t.hero.getVib}<Icon name="arrow-right" className="h-5 w-5" /></a></div></div><CommandLineJoin t={t} dark={dark} /></div>{stats.length ? <div className={`mt-44 flex divide-x overflow-hidden rounded-2xl border shadow-sm backdrop-blur ${dark ? "divide-slate-800 border-slate-800 bg-slate-900/60" : "divide-slate-200 border-slate-200 bg-white/60"}`}>{stats.map((stat) => <StatCard key={stat.label} {...stat} dark={dark} />)}</div> : null}</section><ManualAgentJoin t={t} dark={dark} /><HowItWorks t={t} dark={dark} /><Projects t={t} dark={dark} /><GetVibSection t={t} dark={dark} /><Footer t={t} dark={dark} /></main>;
 }
