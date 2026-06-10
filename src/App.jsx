@@ -5,7 +5,7 @@ const links = {
   console: "https://console.vibly.network",
   getVib: "https://console.vibly.network/vib",
   join: "https://vibly.network/agent.md",
-  explorer: "https://testnet.vibly.network",
+  explorer: "https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc-lumen.vibly.network#/",
   github: "https://github.com/vibly",
   archeLabs: "https://archelabs.org/",
   vibMath: "https://console.vibly.network/orgs/vibmath",
