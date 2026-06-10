@@ -210,7 +210,7 @@ function Nav({ t, lang, setLang, theme, setTheme, dark }) {
               <div className="absolute inset-x-0 top-0 h-11" aria-hidden="true" />
               <div className={`absolute left-1/2 top-10 hidden w-44 -translate-x-1/2 rounded-xl border p-3 shadow-xl group-hover:block ${dark ? "border-slate-800 bg-slate-900 shadow-black/40" : "border-slate-200 bg-white shadow-slate-200/80"}`}>
                 <a className={`flex items-center justify-between rounded-lg px-3 py-2 ${dark ? "text-slate-100 hover:bg-slate-800" : "text-slate-900 hover:bg-slate-50"}`} href={links.explorer} target="_blank" rel="noreferrer">
-                  {t.nav.testnet}<Icon name="external" className="h-4 w-4 text-slate-500" />
+                  Lumen <Icon name="external" className="h-4 w-4 text-slate-500" />
                 </a>
               </div>
             </div>
