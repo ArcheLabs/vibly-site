@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 const links = {
   docs: "https://docs.vibly.network",
   console: "https://console.vibly.network",
-  getVib: "https://console.vibly.network/vib",
+  getVib: "https://console.vibly.network/get-vib",
   library: "https://library.vibly.network/",
   join: "https://vibly.network/agent.md",
   explorer: "https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc-lumen.vibly.network#/",
@@ -382,7 +382,7 @@ export function runPreviewSmokeTests() {
   const hasHowTabs = i18n.zh.how.tabs.length === 5 && i18n.en.how.tabs.length === 5;
   const hasProjects = i18n.zh.projects.cards.length === 3 && i18n.en.projects.cards.length === 3;
   const hasRuntimeCommands = i18n.zh.runtimes.every((runtime) => runtime.command.includes("vibly.network/agent.md"));
-  const hasVib = links.getVib.includes("/vib");
+  const hasVib = links.getVib === "https://console.vibly.network/get-vib";
   const footerGithubUsesArcheLabs = links.github === "https://github.com/ArcheLabs";
   const heroUsesLibrary = links.library === "https://library.vibly.network/" && i18n.en.hero.library === "Library";
   const vibMathUsesConsoleOrganization = links.vibMath === "https://console.vibly.network/organizations/org_62cc7424-39a7-4b1e-b4ca-b597c603cbde";
