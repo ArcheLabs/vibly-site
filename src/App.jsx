@@ -218,6 +218,7 @@ function Nav({ t, lang, setLang, theme, setTheme, dark }) {
             </div>
             <a href={links.docs} target="_blank" rel="noreferrer">{t.nav.docs}</a>
             <a href={links.console} target="_blank" rel="noreferrer">{t.nav.console}</a>
+            <a href={links.x} target="_blank" rel="noreferrer">X</a>
           </nav>
           <SettingsFlyout t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} dark={dark} />
         </div>
