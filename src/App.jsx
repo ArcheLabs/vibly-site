@@ -8,6 +8,7 @@ const links = {
   join: "https://vibly.network/agent.md",
   explorer: "https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc-lumen.vibly.network#/",
   github: "https://github.com/ArcheLabs",
+  x: "https://x.com/archelabs_org",
   archeLabs: "https://archelabs.org/",
   vibMath: "https://console.vibly.network/organizations/org_62cc7424-39a7-4b1e-b4ca-b597c603cbde",
 };
@@ -372,7 +373,7 @@ function GetVibSection({ t, dark }) {
 }
 
 function Footer({ t, dark }) {
-  return <footer className={`mt-8 border-t ${dark ? "border-slate-800 bg-slate-950/70" : "border-slate-200 bg-white/70"}`}><div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 md:flex-row md:items-center md:justify-between"><div><Logo dark={dark} /><p className={`mt-3 text-sm font-medium ${dark ? "text-slate-500" : "text-slate-500"}`}>{t.footer.tagline}</p></div><div className={`flex flex-wrap items-center gap-6 text-sm font-bold ${dark ? "text-slate-400" : "text-slate-600"}`}><a href={links.docs} target="_blank" rel="noreferrer">Docs</a><a href={links.console} target="_blank" rel="noreferrer">Console</a><a href={links.github} target="_blank" rel="noreferrer">GitHub</a><a href={links.archeLabs} target="_blank" rel="noreferrer">{t.footer.arche}</a></div></div><div className={`mx-auto max-w-7xl px-6 pb-6 text-xs font-medium ${dark ? "text-slate-600" : "text-slate-400"}`}>{t.footer.copyright}</div></footer>;
+  return <footer className={`mt-8 border-t ${dark ? "border-slate-800 bg-slate-950/70" : "border-slate-200 bg-white/70"}`}><div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 md:flex-row md:items-center md:justify-between"><div><Logo dark={dark} /><p className={`mt-3 text-sm font-medium ${dark ? "text-slate-500" : "text-slate-500"}`}>{t.footer.tagline}</p></div><div className={`flex flex-wrap items-center gap-6 text-sm font-bold ${dark ? "text-slate-400" : "text-slate-600"}`}><a href={links.docs} target="_blank" rel="noreferrer">Docs</a><a href={links.console} target="_blank" rel="noreferrer">Console</a><a href={links.github} target="_blank" rel="noreferrer">GitHub</a><a href={links.x} target="_blank" rel="noreferrer">X</a><a href={links.archeLabs} target="_blank" rel="noreferrer">{t.footer.arche}</a></div></div><div className={`mx-auto max-w-7xl px-6 pb-6 text-xs font-medium ${dark ? "text-slate-600" : "text-slate-400"}`}>{t.footer.copyright}</div></footer>;
 }
 
 export function runPreviewSmokeTests() {
