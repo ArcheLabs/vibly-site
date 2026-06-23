@@ -3,7 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 const links = {
   docs: "https://docs.vibly.network",
   console: "https://console.vibly.network",
-  getVib: "https://console.vibly.network/get-vib",
+  // getVib: "https://console.vibly.network/get-vib",    // TODO: restore when get-vib module is re-enabled
   library: "https://library.vibly.network/",
   join: "https://vibly.network/agent.md",
   explorer: "https://polkadot.js.org/apps/?rpc=wss%3A%2F%2Frpc-lumen.vibly.network#/",
@@ -369,9 +369,9 @@ function Projects({ t, dark }) {
   );
 }
 
-function GetVibSection({ t, dark }) {
-  return <section className="mx-auto max-w-7xl px-6 py-14"><div className={`relative overflow-hidden rounded-[2rem] border p-10 text-center shadow-sm ${dark ? "border-slate-800 bg-slate-900/75" : "border-slate-200 bg-white/75"}`}><div className="pointer-events-none absolute inset-x-0 bottom-[-60px] text-[120px] font-black tracking-[-0.08em] text-blue-500/5">ArcheLabs</div><div className="relative z-10"><h2 className={`text-5xl font-black tracking-[-0.05em] ${dark ? "text-white" : "text-slate-950"}`}>{t.vib.title}</h2><p className={`mx-auto mt-4 max-w-xl text-lg font-medium ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.vib.desc}</p><div className="mt-8 flex justify-center"><a href={links.getVib} target="_blank" rel="noreferrer" className="inline-flex h-14 items-center gap-3 rounded-xl bg-blue-600 px-10 font-black text-white shadow-[0_18px_35px_rgba(37,99,235,0.24)] transition hover:bg-blue-700">{t.vib.cta}<Icon name="arrow-right" className="h-5 w-5" /></a></div><a href={links.archeLabs} target="_blank" rel="noreferrer" className={`mt-8 inline-flex items-center gap-2 text-sm font-black ${dark ? "text-slate-400 hover:text-white" : "text-slate-500 hover:text-slate-950"}`}>{t.vib.built}<Icon name="external" className="h-4 w-4" /></a></div></div></section>;
-}
+// function GetVibSection({ t, dark }) {
+//   return <section className="mx-auto max-w-7xl px-6 py-14"><div className={`relative overflow-hidden rounded-[2rem] border p-10 text-center shadow-sm ${dark ? "border-slate-800 bg-slate-900/75" : "border-slate-200 bg-white/75"}`}><div className="pointer-events-none absolute inset-x-0 bottom-[-60px] text-[120px] font-black tracking-[-0.08em] text-blue-500/5">ArcheLabs</div><div className="relative z-10"><h2 className={`text-5xl font-black tracking-[-0.05em] ${dark ? "text-white" : "text-slate-950"}`}>{t.vib.title}</h2><p className={`mx-auto mt-4 max-w-xl text-lg font-medium ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.vib.desc}</p><div className="mt-8 flex justify-center"><a href={links.getVib} target="_blank" rel="noreferrer" className="inline-flex h-14 items-center gap-3 rounded-xl bg-blue-600 px-10 font-black text-white shadow-[0_18px_35px_rgba(37,99,235,0.24)] transition hover:bg-blue-700">{t.vib.cta}<Icon name="arrow-right" className="h-5 w-5" /></a></div><a href={links.archeLabs} target="_blank" rel="noreferrer" className={`mt-8 inline-flex items-center gap-2 text-sm font-black ${dark ? "text-slate-400 hover:text-white" : "text-slate-500 hover:text-slate-950"}`}>{t.vib.built}<Icon name="external" className="h-4 w-4" /></a></div></div></section>;
+// }
 
 function Footer({ t, dark }) {
   return <footer className={`mt-8 border-t ${dark ? "border-slate-800 bg-slate-950/70" : "border-slate-200 bg-white/70"}`}><div className="mx-auto flex max-w-7xl flex-col gap-6 px-6 py-8 md:flex-row md:items-center md:justify-between"><div><Logo dark={dark} /><p className={`mt-3 text-sm font-medium ${dark ? "text-slate-500" : "text-slate-500"}`}>{t.footer.tagline}</p></div><div className={`flex flex-wrap items-center gap-6 text-sm font-bold ${dark ? "text-slate-400" : "text-slate-600"}`}><a href={links.docs} target="_blank" rel="noreferrer">Docs</a><a href={links.console} target="_blank" rel="noreferrer">Console</a><a href={links.github} target="_blank" rel="noreferrer">GitHub</a><a href={links.x} target="_blank" rel="noreferrer">X</a><a href={links.archeLabs} target="_blank" rel="noreferrer">{t.footer.arche}</a></div></div><div className={`mx-auto max-w-7xl px-6 pb-6 text-xs font-medium ${dark ? "text-slate-600" : "text-slate-400"}`}>{t.footer.copyright}</div></footer>;
@@ -384,7 +384,7 @@ export function runPreviewSmokeTests() {
   const hasHowTabs = i18n.zh.how.tabs.length === 5 && i18n.en.how.tabs.length === 5;
   const hasProjects = i18n.zh.projects.cards.length === 3 && i18n.en.projects.cards.length === 3;
   const hasRuntimeCommands = i18n.zh.runtimes.every((runtime) => runtime.command.includes("vibly.network/agent.md"));
-  const hasVib = links.getVib === "https://console.vibly.network/get-vib";
+  // const hasVib = links.getVib === "https://console.vibly.network/get-vib";
   const footerGithubUsesArcheLabs = links.github === "https://github.com/ArcheLabs";
   const heroUsesLibrary = links.library === "https://library.vibly.network/" && i18n.en.hero.library === "Library";
   const vibMathUsesConsoleOrganization = links.vibMath === "https://console.vibly.network/organizations/org_62cc7424-39a7-4b1e-b4ca-b597c603cbde";
@@ -397,14 +397,14 @@ export function runPreviewSmokeTests() {
   console.assert(hasHowTabs, "Homepage should include five How it works tabs.");
   console.assert(hasProjects, "Homepage should include three experiment cards.");
   console.assert(hasRuntimeCommands, "Homepage should include one-command agent join flows.");
-  console.assert(hasVib, "Homepage should keep Get VIB conversion.");
+  // console.assert(hasVib, "Homepage should keep Get VIB conversion.");
   console.assert(footerGithubUsesArcheLabs, "Footer GitHub link should point to ArcheLabs.");
   console.assert(heroUsesLibrary, "Hero secondary CTA should link to Vibly Library.");
   console.assert(vibMathUsesConsoleOrganization, "VibMath card should link to the Console organization.");
   console.assert(heroDomainRemoved, "Hero should not show the vibly.network eyebrow text.");
   console.assert(updatedHowCopy, "How it works copy should match the latest Chinese wording.");
   console.assert(commandHasLightStyle, "Command card should support light and dark visual styles.");
-  return hasLocales && hasThemeOptions && navIsMinimal && hasHowTabs && hasProjects && hasRuntimeCommands && hasVib && footerGithubUsesArcheLabs && heroUsesLibrary && vibMathUsesConsoleOrganization && heroDomainRemoved && updatedHowCopy && commandHasLightStyle;
+  return hasLocales && hasThemeOptions && navIsMinimal && hasHowTabs && hasProjects && hasRuntimeCommands && /* hasVib && */ footerGithubUsesArcheLabs && heroUsesLibrary && vibMathUsesConsoleOrganization && heroDomainRemoved && updatedHowCopy && commandHasLightStyle;
 }
 
 export default function ViblyHomepagePreview() {
@@ -414,5 +414,5 @@ export default function ViblyHomepagePreview() {
   const t = i18n[lang];
   const stats = t.stats ?? [];
   const pageBg = dark ? "min-h-screen overflow-hidden bg-[radial-gradient(circle_at_75%_20%,rgba(56,189,248,0.12),transparent_34%),linear-gradient(180deg,#020617_0%,#0f172a_52%,#020617_100%)] text-slate-100" : "min-h-screen overflow-hidden bg-[radial-gradient(circle_at_75%_20%,rgba(56,189,248,0.14),transparent_34%),linear-gradient(180deg,#ffffff_0%,#f7fbff_52%,#ffffff_100%)] text-slate-950";
-  return <main id="home" className={pageBg}><Nav t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} dark={dark} /><section className="mx-auto max-w-7xl px-6 pb-10 pt-28"><div className="grid items-center gap-10 md:grid-cols-2"><div><h1 className={`mt-4 text-6xl font-black tracking-[-0.06em] md:text-7xl ${dark ? "text-white" : "text-slate-950"}`}>{t.hero.title}</h1><p className={`mt-7 max-w-xl text-2xl font-medium leading-snug ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.hero.subtitle}</p><div className="mt-10 flex flex-wrap items-center gap-5"><a href={links.console} target="_blank" rel="noreferrer" className="inline-flex h-14 items-center gap-4 rounded-xl bg-blue-600 px-8 font-bold text-white shadow-[0_18px_35px_rgba(37,99,235,0.24)] transition hover:bg-blue-700">{t.hero.console}<Icon name="arrow-right" className="h-5 w-5" /></a><a href={links.library} target="_blank" rel="noreferrer" className={`inline-flex h-14 items-center gap-4 rounded-xl border px-8 font-bold shadow-sm transition ${dark ? "border-slate-700 bg-slate-900/70 text-white hover:bg-slate-800" : "border-slate-200 bg-white/70 text-slate-950 hover:bg-white"}`}>{t.hero.library}<Icon name="arrow-right" className="h-5 w-5" /></a></div></div><CommandLineJoin t={t} dark={dark} /></div>{stats.length ? <div className={`mt-44 flex divide-x overflow-hidden rounded-2xl border shadow-sm backdrop-blur ${dark ? "divide-slate-800 border-slate-800 bg-slate-900/60" : "divide-slate-200 border-slate-200 bg-white/60"}`}>{stats.map((stat) => <StatCard key={stat.label} {...stat} dark={dark} />)}</div> : null}</section><ManualAgentJoin t={t} dark={dark} /><HowItWorks t={t} dark={dark} /><Projects t={t} dark={dark} /><GetVibSection t={t} dark={dark} /><Footer t={t} dark={dark} /></main>;
+  return <main id="home" className={pageBg}><Nav t={t} lang={lang} setLang={setLang} theme={theme} setTheme={setTheme} dark={dark} /><section className="mx-auto max-w-7xl px-6 pb-10 pt-28"><div className="grid items-center gap-10 md:grid-cols-2"><div><h1 className={`mt-4 text-6xl font-black tracking-[-0.06em] md:text-7xl ${dark ? "text-white" : "text-slate-950"}`}>{t.hero.title}</h1><p className={`mt-7 max-w-xl text-2xl font-medium leading-snug ${dark ? "text-slate-400" : "text-slate-600"}`}>{t.hero.subtitle}</p><div className="mt-10 flex flex-wrap items-center gap-5"><a href={links.console} target="_blank" rel="noreferrer" className="inline-flex h-14 items-center gap-4 rounded-xl bg-blue-600 px-8 font-bold text-white shadow-[0_18px_35px_rgba(37,99,235,0.24)] transition hover:bg-blue-700">{t.hero.console}<Icon name="arrow-right" className="h-5 w-5" /></a><a href={links.library} target="_blank" rel="noreferrer" className={`inline-flex h-14 items-center gap-4 rounded-xl border px-8 font-bold shadow-sm transition ${dark ? "border-slate-700 bg-slate-900/70 text-white hover:bg-slate-800" : "border-slate-200 bg-white/70 text-slate-950 hover:bg-white"}`}>{t.hero.library}<Icon name="arrow-right" className="h-5 w-5" /></a></div></div><CommandLineJoin t={t} dark={dark} /></div>{stats.length ? <div className={`mt-44 flex divide-x overflow-hidden rounded-2xl border shadow-sm backdrop-blur ${dark ? "divide-slate-800 border-slate-800 bg-slate-900/60" : "divide-slate-200 border-slate-200 bg-white/60"}`}>{stats.map((stat) => <StatCard key={stat.label} {...stat} dark={dark} />)}</div> : null}</section><ManualAgentJoin t={t} dark={dark} /><HowItWorks t={t} dark={dark} /><Projects t={t} dark={dark} />{/* <GetVibSection t={t} dark={dark} /> */}<Footer t={t} dark={dark} /></main>;
 }
